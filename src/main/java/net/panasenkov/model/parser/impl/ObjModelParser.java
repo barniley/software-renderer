@@ -3,7 +3,6 @@ package net.panasenkov.model.parser.impl;
 import net.panasenkov.model.Model;
 import net.panasenkov.model.parser.ModelParser;
 import net.panasenkov.model.parser.ParseModelException;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -23,8 +22,7 @@ public class ObjModelParser implements ModelParser {
 				Arrays.stream(ParseRoutine.values())
 						.filter(parseRoutine -> parseRoutine.matches(currentLine))
 						.findFirst()
-						.map(parseRoutine -> Pair.of(parseRoutine, parseRoutine.parse(currentLine)))
-						.ifPresent(pair -> pair.getKey().addTo(model, pair.getValue()));
+						.ifPresent(parseRoutine -> parseRoutine.addTo(model, parseRoutine.parse(currentLine)));
 			}
 			return model;
 		} catch (IOException e) {
