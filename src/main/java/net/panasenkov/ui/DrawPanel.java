@@ -1,5 +1,10 @@
 package net.panasenkov.ui;
 
+import net.panasenkov.model.Face;
+import net.panasenkov.model.Model;
+import net.panasenkov.model.loader.ModelLoader;
+import net.panasenkov.model.loader.ModelLocation;
+import net.panasenkov.model.parser.Vec3;
 import net.panasenkov.renderer.line.LineAlgorithmStrategy;
 import net.panasenkov.renderer.line.Point;
 import net.panasenkov.renderer.line.impl.BresenhamLineStrategy;
@@ -9,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class DrawPanel extends JPanel implements ActionListener {
 
@@ -18,9 +24,34 @@ public class DrawPanel extends JPanel implements ActionListener {
 
 		Graphics2D g2d = (Graphics2D) g;
 
-		drawLine(g2d, Color.RED, lineAlgorithmStrategy.line(100, 100, 400, 350));
-		drawLine(g2d, Color.BLUE, lineAlgorithmStrategy.line(300, 100, 200, 300));
-		drawLine(g2d, Color.RED, lineAlgorithmStrategy.line(200, 300, 300, 100));
+		Model cubeModel = ModelLoader.load(ModelLocation.HEAD_OBJ_MODEL);
+
+		drawModel(g2d, Color.WHITE, cubeModel);
+	}
+
+	private void drawModel(Graphics2D g2d, Color meshLineColor, Model model) {
+		int width = getWidth();
+		int height = getHeight();
+
+		List<Vec3<Float>> vertices = model.getVertices();
+		model.getFaces().stream()
+				.map(Face::getVertexIndexes)
+				.forEach(vertexIndexes ->
+						IntStream.range(0, 3).forEach(index -> {
+							// Vertex index starts from 1. Need to subtract 1.
+							Vec3<Float> begin = vertices.get(vertexIndexes.get(index) - 1);
+							Vec3<Float> end = vertices.get(vertexIndexes.get((index + 1) % 3) - 1);
+							List<Point> line = lineAlgorithmStrategy.line(
+									(int) ((begin.getX() + 1.0) * width * 0.5),
+									// flip vertically
+									height - (int) ((begin.getY() + 1.0) * height * 0.5),
+									(int) ((end.getX() + 1.0) * width * 0.5),
+									// flip vertically
+									height - (int) ((end.getY() + 1.0) * height * 0.5)
+							);
+							drawLine(g2d, meshLineColor, line);
+					})
+				);
 	}
 
 	private void drawLine(Graphics2D g2d, Color color, List<Point> points) {

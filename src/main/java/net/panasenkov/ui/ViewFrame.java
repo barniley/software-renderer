@@ -1,6 +1,7 @@
 package net.panasenkov.ui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ViewFrame extends JFrame {
 
@@ -10,8 +11,9 @@ public class ViewFrame extends JFrame {
 
 	private void init() {
 		final DrawPanel surface = new DrawPanel();
+		surface.setBackground(Color.BLACK);
 		add(surface);
-		setSize(800, 600);
+		setSize(1200, 1200);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
