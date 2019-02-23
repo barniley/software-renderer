@@ -1,12 +1,12 @@
 package net.panasenkov.model;
 
 import lombok.Value;
+import net.panasenkov.model.parser.Vec3;
 
 import java.util.List;
-import java.util.Vector;
 
 @Value
 public class Model {
-	private final List<Vector<Float>> vertices;
-	private final List<Vector<Integer>> faces;
+	private final List<Vec3<Float>> vertices;
+	private final List<Face> faces;
 }
