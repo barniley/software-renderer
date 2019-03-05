@@ -1,7 +1,7 @@
 package net.panasenkov.renderer.line.impl;
 
 import net.panasenkov.renderer.line.LineAlgorithmStrategy;
-import net.panasenkov.renderer.line.Point;
+import net.panasenkov.renderer.Point;
 
 import java.util.ArrayList;
 import java.util.List;

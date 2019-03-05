@@ -1,5 +1,7 @@
 package net.panasenkov.renderer.line;
 
+import net.panasenkov.renderer.Point;
+
 import java.util.List;
 
 public interface LineAlgorithmStrategy {

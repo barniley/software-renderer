@@ -1,4 +1,4 @@
-package net.panasenkov.renderer.line;
+package net.panasenkov.renderer;
 
 public enum Color {
 	WHITE(255, 255, 255, 0),

@@ -6,7 +6,7 @@ import net.panasenkov.model.loader.ModelLoader;
 import net.panasenkov.model.loader.ModelLocation;
 import net.panasenkov.model.parser.Vec3;
 import net.panasenkov.renderer.line.LineAlgorithmStrategy;
-import net.panasenkov.renderer.line.Point;
+import net.panasenkov.renderer.Point;
 import net.panasenkov.renderer.line.impl.BresenhamLineStrategy;
 
 import javax.swing.*;

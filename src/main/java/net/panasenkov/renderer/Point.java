@@ -1,4 +1,4 @@
-package net.panasenkov.renderer.line;
+package net.panasenkov.renderer;
 
 import lombok.Value;
 
